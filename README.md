@@ -30,3 +30,31 @@ This project implements an **ETL (Extract, Transform, Load)** pipeline using **P
 1. **Clone this repository**:
    ```bash
    git clone https://github.com/<your-username>/etl-pipeline-python-sql.git
+
+   ### Installation Steps
+
+1. **Install the required Python libraries**:
+   ```bash
+   pip install -r requirements.txt
+## Database Setup:
+
+Create a database in Microsoft SQL Server (e.g., COINS).
+Make sure you configure the server and database details in the script (etl_pipeline.py).
+Batch Script Configuration:
+
+
+### Windows Task Scheduler:
+
+Schedule the batch file to run at your desired interval (e.g., daily or hourly).
+How it Works
+### Extract:
+The extract() function makes an HTTP request to the CoinGecko API to fetch cryptocurrency data (like market cap, volume, etc.).
+
+### Transform:
+The transform() function processes the data, renaming columns, converting timestamps, and filling missing values.
+
+### Load:
+The load() function stores the cleaned data into a Microsoft SQL Server database, replacing any existing records in the BTC table.
+
+### Automation:
+Once the task is scheduled using Windows Task Scheduler, the batch file will automatically run the Python script at specified intervals.
