@@ -48,42 +48,40 @@ Ensure the server and database details are correctly configured in the Python sc
 Batch Script Configuration:
 
 Create a batch file (e.g., run_etl.bat) that runs the Python ETL script. Example content of the batch file:
-bash
-Copier
-Modifier
+
 python etl_pipeline.py
 Windows Task Scheduler:
 
 Schedule the batch file to run at your desired interval (e.g., daily or hourly).
-How it Works
-Extract
-The extract() function sends an HTTP request to the CoinGecko API to fetch the top 10 cryptocurrencies' market data (e.g., market cap, volume, and current price). The data is returned in JSON format.
+## How it Works
+### Extract
+The **extract()** function sends an HTTP request to the CoinGecko API to fetch the top 10 cryptocurrencies' market data (e.g., market cap, volume, and current price). The data is returned in JSON format.
 
-Transform
-The transform() function processes the extracted data by:
+### Transform
+The **transform()** function processes the extracted data by:
 
-Selecting relevant columns (e.g., CoinID, Symbol, CoinName, etc.).
-Renaming columns for better readability.
-Converting the timestamp to a proper datetime format.
-Handling missing data by filling missing values with 0 for price, market cap, and volume.
-Load
-The load() function stores the transformed data into a Microsoft SQL Server database. It writes the data into the BTC table, replacing any existing records.
+ - Selecting relevant columns (e.g., CoinID, Symbol, CoinName, etc.).
+ - Renaming columns for better readability.
+ - Converting the timestamp to a proper datetime format.
+ - Handling missing data by filling missing values with 0 for price, market cap, and volume.
+### Load
+The **load()** function stores the transformed data into a Microsoft SQL Server database. It writes the data into the BTC table, replacing any existing records.
 
-Automation
+### Automation
 The entire ETL process is automated using a batch file, which is scheduled to run periodically using Windows Task Scheduler. This ensures that the data is updated automatically at the specified intervals.
 
-Project Motivation
+## Project Motivation
 The idea behind this project came from the need to automate the collection and storage of cryptocurrency market data in a structured database for easy access and analysis. As cryptocurrency data changes frequently, having an automated process to regularly update this information helps businesses or researchers maintain up-to-date data without manual intervention.
 
-Limitations & Challenges
+## Limitations & Challenges
 API Rate Limits: CoinGecko has rate limits, which may limit the frequency of data extraction if you're using a free API key.
 Data Quality: While the data is extracted from a reputable source, there could still be some missing or incomplete data, which is handled during the transformation step.
 Server Configuration: The pipeline requires proper configuration of the SQL Server instance, which could pose difficulties if the database settings are not correctly configured.
 Intended Use
 This project is intended for anyone looking to automate the collection of cryptocurrency market data and store it in a SQL database for further analysis, reporting, or other use cases. It is particularly useful for businesses, data analysts, or developers who require real-time data for decision-making or applications.
 
-Credits
-CoinGecko for providing a free and reliable API for cryptocurrency data.
-Microsoft SQL Server for managing the database.
-Python Libraries (requests, pandas, pyodbc, SQLAlchemy) for their functionality in handling data extraction, transformation, and database interaction.
-Windows Task Scheduler for enabling automation of the ETL pipeline.
+## Credits
+- CoinGecko for providing a free and reliable API for cryptocurrency data.
+- Microsoft SQL Server for managing the database.
+- Python Libraries (requests, pandas, pyodbc, SQLAlchemy) for their functionality in handling data extraction, transformation, and database interaction.
+- Windows Task Scheduler for enabling automation of the ETL pipeline.
